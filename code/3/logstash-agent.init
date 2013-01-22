@@ -1,0 +1,68 @@
+#! /bin/sh
+#
+# Logstash Start/Stop logstash
+#
+# chkconfig: 345 99 99
+# description: Logstash
+# processname: logstash
+
+java_bin=`which java`
+logstash_bin="${java_bin} -jar /opt/logstash/logstash.jar"
+logstash_conf="/etc/logstash/shipper.conf"
+logstash_log="/var/log/logstash/shipper.log"
+
+find_logstash_process () {
+    PIDTEMP=`ps ux | grep logstash | grep java | awk '{ print $2 }'`
+    # Pid not found
+    if [ "x$PIDTEMP" = "x" ]; then
+        PID=-1
+    else
+        PID=$PIDTEMP
+    fi
+}
+
+start () {
+    LOG_DIR=`dirname ${logstash_log}`
+    if [ ! -d $LOG_DIR ]; then
+      echo "Log dir ${LOG_DIR} doesn't exist. Creating"
+      mkdir $LOG_DIR
+    fi
+    nohup ${logstash_bin} agent -v -f ${logstash_conf} --log ${logstash_log} &
+}
+
+stop () {
+    find_logstash_process
+    if [ $PID -ne -1 ]; then
+        kill $PID
+    fi
+}
+
+case $1 in
+start)
+        start
+        ;;
+stop)
+        stop
+        exit 0
+        ;;
+reload)
+        stop
+        start
+        ;;
+restart)
+        stop
+        start
+        ;;
+status)
+        find_logstash_process
+if [ $PID -gt 0 ]; then
+            exit 0
+        else
+            exit 1
+fi
+        ;;
+*fi)
+        echo $"Usage: $0 {start|stop|restart|reload|status}"
+        RETVAL=1
+esac
+exit 0

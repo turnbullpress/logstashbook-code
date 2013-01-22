@@ -1,0 +1,63 @@
+#! /bin/sh
+#
+# lumberjack Start/Stop lumberjack
+#
+# chkconfig: 345 99 99
+# description: lumberjack
+# processname: lumberjack
+
+# Check config
+test -f /etc/sysconfig/lumberjack && . /etc/sysconfig/lumberjack
+
+lumberjack_bin="/opt/lumberjack/bin/lumberjack.sh"
+
+find_lumberjack_process () {
+    PIDTEMP=`ps ux | grep lumberjack | grep java | awk '{ print $2 }'`
+    # Pid not found
+    if [ "x$PIDTEMP" = "x" ]; then
+        PID=-1
+    else
+        PID=$PIDTEMP
+    fi
+}
+
+start () {
+    nohup ${lumberjack_bin} ${lumberjack_options} ${lumberjack_filelist} &
+}
+
+stop () {
+    find_lumberjack_process
+    if [ $PID -ne -1 ]; then
+        kill $PID
+    fi
+}
+
+case $1 in
+start)
+        start
+        ;;
+stop)
+        stop
+        exit 0
+        ;;
+reload)
+        stop
+        start
+        ;;
+restart)
+        stop
+        start
+        ;;
+status)
+        find_lumberjack_process
+if [ $PID -gt 0 ]; then
+            exit 0
+        else
+            exit 1
+fi
+        ;;
+*fi)
+        echo $"Usage: $0 {start|stop|restart|reload|status}"
+        RETVAL=1
+esac
+exit 0

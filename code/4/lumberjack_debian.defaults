@@ -1,0 +1,2 @@
+# Options for lumberjack
+LUMBERJACK_OPTIONS="--host 10.0.0.1 --port 6782 --ssl-ca-path /etc/lumberjack/server.crt /var/log/syslog /var/log/auth.log"

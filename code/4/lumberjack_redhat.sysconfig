@@ -1,0 +1,3 @@
+# Options for lumberjack
+LUMBERJACK_OPTIONS="--host 10.0.0.1 --port 6782 --ssl-ca-file /etc/logstash/server.crt"
+LUMBERJACK_FILELIST="/var/log/syslog /var/log/auth.log"
