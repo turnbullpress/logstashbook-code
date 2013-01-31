@@ -2,15 +2,13 @@
     "template": "logstash*",
     "settings": {
         "index.query.default_field": "@message",
-        "index.cache.field.type": "soft"
+        "index.cache.field.type": "soft",
+        "index.store.compress.stored": true
     },
     "mappings": {
         "_default_": {
             "_all": {
                 "enabled": false
-            },
-            "_source": { 
-                "compress": "true"
             },
             "properties": {
                 "@message": {
