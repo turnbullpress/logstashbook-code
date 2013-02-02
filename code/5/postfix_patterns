@@ -1,0 +1,4 @@
+COMPONENT ([\w._\/%-]+)
+COMPID postfix\/%{COMPONENT:component}(?:\[%{POSINT:pid}\])?
+QUEUEID ([0-9A-F]{,11})
+POSTFIX %{SYSLOGTIMESTAMP:timestamp} %{SYSLOGHOST:hostname} %{COMPID}: %{QUEUEID:queueid}
