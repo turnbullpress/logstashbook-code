@@ -55,11 +55,13 @@ restart)
         ;;
 status)
         find_logstash_process
-if [ $PID -gt 0 ]; then
-            exit 0
+        if [ $PID -gt 0 ]; then
+          echo "logstash running: $PID"
+          exit 0
         else
-            exit 1
-fi
+          echo "logstash not running"
+          exit 1
+        fi
         ;;
 *)
         echo $"Usage: $0 {start|stop|restart|reload|status}"
