@@ -61,7 +61,7 @@ if [ $PID -gt 0 ]; then
             exit 1
 fi
         ;;
-*fi)
+*)
         echo $"Usage: $0 {start|stop|restart|reload|status}"
         RETVAL=1
 esac
