@@ -12,7 +12,7 @@ test -f /etc/sysconfig/lumberjack && . /etc/sysconfig/lumberjack
 lumberjack_bin="/opt/lumberjack/bin/lumberjack.sh"
 
 find_lumberjack_process () {
-    PIDTEMP=`ps ux | grep lumberjack | grep java | awk '{ print $2 }'`
+    PIDTEMP=`ps ux | grep lumberjack | awk '{ print $2 }'`
     # Pid not found
     if [ "x$PIDTEMP" = "x" ]; then
         PID=-1
