@@ -20,13 +20,12 @@ class LogStash::Inputs::NamedPipe < LogStash::Inputs::Base
     public
     def run(queue)
       @pipe = open(pipe, "r+")
-      hostname = Socket.gethostname
-
       @pipe.each do |line|
         line = line.chomp
-        source = "namedpipe://#{hostname}/#{pipe}"
+        host = Socket.gethostname
+        path = pipe
         @logger.debug("Received line", :pipe => pipe, :line => line)
-        e = to_event(line, source)
+        e = to_event(line, host, path)
         if e
           queue << e
         end

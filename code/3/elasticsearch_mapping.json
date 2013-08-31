@@ -15,10 +15,6 @@
                     "type": "string",
                     "index": "analyzed"
                 },
-                "source": {
-                    "type": "string",
-                    "index": "not_analyzed"
-                },
                 "@version": {
                     "type": "string",
                     "index": "not_analyzed"
