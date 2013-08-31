@@ -1,9 +1,12 @@
+# From The LogStash Book
+# The original of this file can be found at: http://logstashbook.com/code/index.html
+#
 require "logstash/outputs/base"
 require "logstash/namespace"
 
 class LogStash::Outputs::CowSay < LogStash::Outputs::Base
   config_name "cowsay"
-  plugin_status "experimental"
+  milestone 1
 
   # The location of the CowSay log file.
   config :cowsay_log, :validate => :string, :default => "/var/log/cowsay.log" 

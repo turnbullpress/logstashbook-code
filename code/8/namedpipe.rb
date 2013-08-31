@@ -1,9 +1,13 @@
+# From The LogStash Book
+# The original of this file can be found at: http://logstashbook.com/code/index.html
+#
 require 'logstash/namespace'
 require 'logstash/inputs/base'
 
 class LogStash::Inputs::NamedPipe < LogStash::Inputs::Base
     config_name "namedpipe"
-    plugin_status "experimental"
+    milestone 1
+    default :codec, "plain"
 
     # The pipe to read from
     config :pipe, :validate => :string, :required => true

@@ -1,9 +1,12 @@
+# From The LogStash Book
+# The original of this file can be found at: http://logstashbook.com/code/index.html
+#
 require "logstash/filters/base"
 require "logstash/namespace"
 
 class LogStash::Filters::AddSuffix < LogStash::Filters::Base
   config_name "addsuffix"
-  plugin_status "experimental"
+  milestone 1
 
   # The suffix to be added to the message.
   config :suffix, :validate => :string

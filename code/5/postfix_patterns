@@ -1,3 +1,7 @@
+# From The LogStash Book
+# The original of this file can be found at: http://logstashbook.com/code/index.html
+#
+
 COMP ([\w._\/%-]+)
 COMPPID postfix\/%{COMP:component}(?:\[%{POSINT:pid}\])?
 QUEUEID ([A-F0-9]{5,15}{1})

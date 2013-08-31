@@ -1,5 +1,9 @@
 #! /bin/sh
 
+# From The LogStash Book
+# The original of this file can be found at: http://logstashbook.com/code/index.html
+#
+
 ### BEGIN INIT INFO
 # Provides:          lumberjack
 # Required-Start:    $remote_fs $syslog
