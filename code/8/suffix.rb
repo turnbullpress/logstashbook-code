@@ -19,8 +19,8 @@ class LogStash::Filters::AddSuffix < LogStash::Filters::Base
   public
   def filter(event)
     if @suffix
-      msg = event.message + " " + @suffix
-      event.message = msg
+      msg = event["message"] + " " + @suffix
+      event["message"] = msg
     end
   end
 end

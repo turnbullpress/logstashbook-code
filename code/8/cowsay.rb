@@ -17,7 +17,7 @@ class LogStash::Outputs::CowSay < LogStash::Outputs::Base
 
   public
   def receive(event)
-    msg = `cowsay #{event.message}`
+    msg = `cowsay #{event["message"]}`
     File.open(@cowsay_log, 'a+') { |file| file.write("#{msg}") }
   end
 end
