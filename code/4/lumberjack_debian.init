@@ -16,20 +16,20 @@
 
 . /lib/lsb/init-functions
 
-name="lumberjack"
+NAME="lumberjack"
 
 # Read configuration variable file if it is present
-[ -r /etc/default/$name ] && . /etc/default/$name
+[ -r /etc/default/$NAME ] && . /etc/default/$NAME
 
-lumberjack_bin="/opt/lumberjack/bin/lumberjack.sh"
-pid_file="/var/run/$name.pid"
-cwd=`pwd`
+LUMBERJACK_BIN="/opt/lumberjack/bin/lumberjack.sh"
+PID_FILE="/var/run/$NAME.pid"
+CWD=`pwd`
 
 start () {
-        command="${lumberjack_bin}"
+        command="${LUMBERJACK_BIN}"
 
-        log_daemon_msg "Starting $name"
-        if start-stop-daemon --start --quiet --oknodo --pidfile "$pid_file" -b -m -N 19 --exec $command -- $LUMBERJACK_OPTIONS; then
+        log_daemon_msg "Starting $NAME"
+        if start-stop-daemon --start --quiet --oknodo --pidfile "$PID_FILE" -b -m -N 19 --exec $COMMAND -- $LUMBERJACK_OPTIONS; then
                 log_end_msg 0
         else
                 log_end_msg 1
@@ -37,11 +37,11 @@ start () {
 }
 
 stop () {
-        start-stop-daemon --stop --quiet --oknodo --pidfile "$pid_file"
+        start-stop-daemon --stop --quiet --oknodo --pidfile "$PID_FILE"
 }
 
 status () {
-        status_of_proc -p $pid_file "" "$name"
+        status_of_proc -p $PID_FILE "" "$NAME"
 }
 
 case $1 in

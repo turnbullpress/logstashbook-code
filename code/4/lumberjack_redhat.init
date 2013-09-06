@@ -11,7 +11,7 @@
 # Check config
 test -f /etc/sysconfig/lumberjack && . /etc/sysconfig/lumberjack
 
-lumberjack_bin="/opt/lumberjack/bin/lumberjack.sh"
+LUMBERJACK_BIN="/opt/lumberjack/bin/lumberjack.sh"
 
 find_lumberjack_process () {
     PIDTEMP=`ps ux | grep lumberjack | grep java | awk '{ print $2 }'`
@@ -24,7 +24,7 @@ find_lumberjack_process () {
 }
 
 start () {
-    nohup ${lumberjack_bin} ${lumberjack_options} &
+    nohup ${LUMBERJACK_BIN} ${LUMBERJACK_OPTIONS} &
 }
 
 stop () {
