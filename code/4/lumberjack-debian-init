@@ -26,7 +26,7 @@ PID_FILE="/var/run/$NAME.pid"
 CWD=`pwd`
 
 start () {
-        command="${LUMBERJACK_BIN}"
+        COMMAND="${LUMBERJACK_BIN}"
 
         log_daemon_msg "Starting $NAME"
         if start-stop-daemon --start --quiet --oknodo --pidfile "$PID_FILE" -b -m -N 19 --exec $COMMAND -- $LUMBERJACK_OPTIONS; then
