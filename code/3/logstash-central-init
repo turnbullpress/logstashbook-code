@@ -35,6 +35,7 @@ start () {
 }
 
 stop () {
+        log_daemon_msg "Stopping $name"
         start-stop-daemon --stop --quiet --oknodo --pidfile "$pid_file"
 }
 
@@ -52,10 +53,12 @@ case $1 in
                 ;;
         reload)
                 stop
+                sleep 2
                 start
                 ;;
         restart)
                 stop
+                sleep 2
                 start
                 ;;
         status)
