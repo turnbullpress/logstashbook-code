@@ -50,10 +50,12 @@ case $1 in
                 ;;
         reload)
                 stop
+                sleep 2
                 start
                 ;;
         restart)
                 stop
+                sleep 2
                 start
                 ;;
         status)
