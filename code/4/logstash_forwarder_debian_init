@@ -5,7 +5,7 @@
 #
 
 ### BEGIN INIT INFO
-# Provides:          logstash
+# Provides:          logstash-forwarder
 # Required-Start:    $remote_fs $syslog
 # Required-Stop:     $remote_fs $syslog
 # Default-Start:     2 3 4 5
@@ -16,16 +16,20 @@
 
 . /lib/lsb/init-functions
 
-name="logstash-web"
-logstash_bin="/usr/bin/java -- -jar /opt/logstash/logstash.jar"
-pid_file="/var/run/$name.pid"
-cwd=`pwd`
+NAME="logstash-forwarder"
+
+# Read configuration variable file if it is present
+[ -r /etc/default/$NAME ] && . /etc/default/$NAME
+
+LOGSTASH_FORWARDER_BIN="/opt/logstash-forwarder/bin/logstash-forwarder"
+PID_FILE="/var/run/$NAME.pid"
+CWD=`pwd`
 
 start () {
-        command="${logstash_bin} web --log /var/log/logstash/web.log"
+        COMMAND="${LOGSTASH_FORWARDER_BIN}"
 
-        log_daemon_msg "Starting $name"
-        if start-stop-daemon --start --quiet --oknodo -d /opt/logstash --pidfile "$pid_file" -b -m -N 19 --exec $command; then
+        log_daemon_msg "Starting $NAME"
+        if start-stop-daemon --start --quiet --oknodo --pidfile "$PID_FILE" -b -m -N 19 --exec $COMMAND -- $LOGSTASH_FORWARDER_OPTIONS; then
                 log_end_msg 0
         else
                 log_end_msg 1
@@ -33,11 +37,11 @@ start () {
 }
 
 stop () {
-        start-stop-daemon --stop --quiet --oknodo --pidfile "$pid_file"
+        start-stop-daemon --stop --quiet --oknodo --pidfile "$PID_FILE"
 }
 
 status () {
-        status_of_proc -p $pid_file "" "$name"
+        status_of_proc -p $PID_FILE "" "$NAME"
 }
 
 case $1 in

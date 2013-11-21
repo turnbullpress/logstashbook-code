@@ -1,0 +1,5 @@
+# From The LogStash Book
+# The original of this file can be found at: http://logstashbook.com/code/index.html
+#
+# Options for the LogStash Forwarder
+LOGSTASH_FORWARDER_OPTIONS="-config /etc/logstash-forwarder/logstash-forwarder.conf"
