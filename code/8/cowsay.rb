@@ -1,4 +1,4 @@
-# From The LogStash Book
+# From The Logstash Book
 # The original of this file can be found at: http://logstashbook.com/code/index.html
 #
 require "logstash/outputs/base"

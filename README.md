@@ -1,9 +1,9 @@
-# The LogStash Book Code Repository
+# The Logstash Book Code Repository
 
-Contains the code and configuration examples from [The LogStash
+Contains the code and configuration examples from [The Logstash
 Book](http://www.logstashbook.com).
 
-*Now updated for LogStash v1.2.0.*
+*Now updated for Logstash v1.3.2.*
 
 ## Errata
 
