@@ -14,7 +14,7 @@ test -f /etc/sysconfig/logstash-forwarder && . /etc/sysconfig/logstash-forwarder
 LOGSTASH_FORWARDER_BIN="/opt/logstash-forwarder/bin/logstash-forwarder"
 
 find_logstash_forwarder_process () {
-    PIDTEMP=`ps ux | grep logstash-forwarder | grep java | awk '{ print $2 }'`
+    PIDTEMP=`pgrep -f ${LOGSTASH_FORWARDER_BIN}`
     # Pid not found
     if [ "x$PIDTEMP" = "x" ]; then
         PID=-1
@@ -28,10 +28,7 @@ start () {
 }
 
 stop () {
-    find_logstash_forwarder_process
-    if [ $PID -ne -1 ]; then
-        kill $PID
-    fi
+  pkill -f ${LOGSTASH_FORWARDER_BIN}
 }
 
 case $1 in
@@ -40,7 +37,7 @@ start)
         ;;
 stop)
         stop
-        exit 0
+        exit 0;
         ;;
 reload)
         stop
@@ -52,7 +49,7 @@ restart)
         ;;
 status)
         find_logstash_forwarder_process
-if [ $PID -gt 0 ]; then
+        if [ $PID -gt 0 ]; then
             exit 0
         else
             exit 1
