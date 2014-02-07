@@ -30,7 +30,7 @@ start () {
       echo "Log dir ${LOG_DIR} doesn't exist. Creating"
       mkdir $LOG_DIR
     fi
-    nohup ${logstash_bin} agent -v -f ${logstash_conf} --log ${logstash_log} > /dev/null 2>&1 &
+    nohup ${logstash_bin} agent --verbose -f ${logstash_conf} --log ${logstash_log} > /dev/null 2>&1 &
 }
 
 stop () {
