@@ -17,9 +17,9 @@
 . /lib/lsb/init-functions
 
 name="logstash-central"
+logstash_bin="/opt/logstash/bin/logstash"
 logstash_conf="/etc/logstash/central.conf"
 logstash_log="/var/log/logstash/central.log"
-logstash_bin="/usr/bin/java -- -jar /opt/logstash/logstash.jar"
 pid_file="/var/run/$name.pid"
 cwd=`pwd`
 

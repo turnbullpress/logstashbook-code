@@ -17,7 +17,7 @@
 . /lib/lsb/init-functions
 
 name="logstash-web"
-logstash_bin="/usr/bin/java -- -jar /opt/logstash/logstash.jar"
+logstash_bin="/opt/logstash/bin/logstash"
 pid_file="/var/run/$name.pid"
 cwd=`pwd`
 
