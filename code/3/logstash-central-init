@@ -24,7 +24,7 @@ pid_file="/var/run/$name.pid"
 cwd=`pwd`
 
 start () {
-        command="${logstash_bin} -- agent --verbose -f $logstash_conf --log $logstash_log"
+        command="${logstash_bin} agent --verbose -f $logstash_conf --log $logstash_log"
 
         log_daemon_msg "Starting $name"
         if start-stop-daemon --start --quiet --oknodo -d /opt/logstash/ --pidfile "$pid_file" -b -m -N 19 --exec $command; then
