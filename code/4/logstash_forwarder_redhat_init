@@ -16,7 +16,7 @@ LOGSTASH_FORWARDER_BIN="/opt/logstash-forwarder/bin/logstash-forwarder"
 find_logstash_forwarder_process () {
     PIDTEMP=`pgrep -f ${LOGSTASH_FORWARDER_BIN}`
     # Pid not found
-    if [ "x$PIDTEMP" = "x" ]; then
+    if [ -z "$PIDTEMP" ]; then
         PID=-1
     else
         PID=$PIDTEMP
@@ -24,6 +24,12 @@ find_logstash_forwarder_process () {
 }
 
 start () {
+    find_logstash_forwarder_process
+    if [ "$PID" -ne "-1" ]; then
+        echo "logstash already running: $PID"
+        exit 0
+    fi
+
   nohup ${LOGSTASH_FORWARDER_BIN} ${LOGSTASH_FORWARDER_OPTIONS} &
 }
 
